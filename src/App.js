@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {setScroll} from "./redux/actions";
+import {connect} from "react-redux";
+import Header from "./components/Header";
+import Content from "./components/Content";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends React.Component {
+
+  render() {
+    return (
+        <div className="App">
+          <Header/>
+          <Content/>
+        </div>
+        // <Container/>
+    )
+  }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setScroll: scroll => dispatch(setScroll(scroll)),
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App)
